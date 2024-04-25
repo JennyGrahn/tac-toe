@@ -12,13 +12,21 @@ def main():
 
     board = [[' ' for _ in range(columns)] for _ in range(rows)]
 
-    for i in range(rows):
-        for j in range(columns):
-            board[i][j] = input("Enter 'X' or 'O' for position ({}, {}): ".format(i + 1, j + 1))
-
     print("Current board:")
     for row in board:
         print(' '.join(row))
+
+    row_input = int(input("Enter row number(1 to {}): ".format(rows))) - 1
+    col_input = int(input("Enter column numer (1 to {}): ".format(columns))) - 1
+
+    if row_input < 0 or row_input >= rows or col_input < 0 or col_input >= columns:
+        print("Invalid position. Try again.")
+
+    if board[row_input][col_input] == ' ':
+            board[row_input][col_input] = 'X'
+    else:
+        print("Position already occupied. Try again.")
+
 
     checkld = check_ldiagonal(board)
     checkrd = check_rdiagonal(board)
