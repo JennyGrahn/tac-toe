@@ -11,12 +11,13 @@ def main():
     rows, columns = sizes.get(choice, (3, 3))
 
     board = [[' ' for _ in range(columns)] for _ in range(rows)]
-
+    
     print("Current board:")
     for row in board:
-        print(' '.join(row))
+        print('|'.join(row))
+        print('-' * (len(row) * 2 - 1))
 
-    row_input = int(input("Enter row number(1 to {}): ".format(rows))) - 1
+    row_input = int(input("Enter row number (1 to {}): ".format(rows))) - 1
     col_input = int(input("Enter column numer (1 to {}): ".format(columns))) - 1
 
     if row_input < 0 or row_input >= rows or col_input < 0 or col_input >= columns:
@@ -26,6 +27,7 @@ def main():
             board[row_input][col_input] = 'X'
     else:
         print("Position already occupied. Try again.")
+
 
 
     checkld = check_ldiagonal(board)
@@ -65,6 +67,13 @@ def check_rows_and_col(arr):
             if len(set(row)) == 1 or len(set(col)) == 1:
                 return True
     return False
+
+def check_board_full(board):
+    for row in board:
+        for cell in row:
+            if cell == ' ':
+                return False
+        return True
 
 if __name__ == "__main__":
     main()
